@@ -104,7 +104,28 @@ def calculator():
 @app.route('/calculator_results')
 def calculator_results():
     """Shows the user the result of their calculation."""
-    pass
+    num1 = int(request.args.get('operand1'))
+    num2 = int(request.args.get('operand2'))
+    user_operation = request.args.get('operation')
+
+    if user_operation == 'add':
+      result = num1 + num2
+    elif user_operation == 'subtract':
+      result = num1 - num2
+    elif user_operation == 'multiply':
+      result = num1 * num2
+    else:
+      result = num1 / num2
+
+    context = {
+      'num1': num1,
+      'num2': num2,
+      'user_operation': user_operation,
+      'result': result
+    }
+
+    return render_template('calculator_results.html', **context)
+
 
 
 HOROSCOPE_PERSONALITIES = {
